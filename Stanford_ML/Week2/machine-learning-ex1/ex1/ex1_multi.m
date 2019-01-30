@@ -36,6 +36,7 @@ fprintf('Loading data ...\n');
 %% Load Data
 data = load('ex1data2.txt');
 X = data(:, 1:2);
+size(X)
 y = data(:, 3);
 m = length(y);
 
@@ -52,7 +53,10 @@ fprintf('Normalizing Features ...\n');
 [X mu sigma] = featureNormalize(X);
 
 % Add intercept term to X
+size(X)
 X = [ones(m, 1) X];
+
+size(X)
 
 
 %% ================ Part 2: Gradient Descent ================
@@ -82,7 +86,9 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
+%alpha = 0.01;
 alpha = 0.01;
+%num_iters = 400;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
@@ -104,9 +110,11 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
-
-
+% price = 0; % You should change this
+x = [1650 3];
+norm_x = [(x(1)-mu(1))/sigma(1) (x(2)-mu(2))/sigma(2)]
+norm_x = [1 norm_x];
+price = norm_x * theta;
 % ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
@@ -149,7 +157,8 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+price = X * theta; % You should change this
+
 
 
 % ============================================================
